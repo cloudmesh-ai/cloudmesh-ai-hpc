@@ -583,6 +583,26 @@ def slurm_cancel(job_id: str, debug: bool) -> None:
     hpc.cancel(job_id)
 
 
+@hpc_group.command(name="ticket")
+@click.argument("target", required=False)
+def hpc_ticket(target: Optional[str]) -> None:
+    """Open a support request. Use 'www' for the web form, or leave blank for email."""
+    hpc = Hpc()
+    # Use email from documentation authors
+    support_email = "laszewski@gmail.com"
+    support_url = "https://www.rc.virginia.edu/form/support-request/"
+
+    if target == "www":
+        console.msg(f"Opening support web form: {support_url}")
+        webbrowser.open(support_url)
+    else:
+        subject = "HPC Support Request"
+        body = "Please describe your issue here."
+        mailto_url = f"mailto:{support_email}?subject={subject}&body={body}"
+        console.msg(f"Opening email client to: {support_email}")
+        webbrowser.open(mailto_url)
+
+
 @slurm_group.command(name="status")
 @click.argument("job_id")
 @click.option("--debug", is_flag=True, help="Enable debug mode")
@@ -1126,12 +1146,6 @@ def tutorial_cmd(keyword: Optional[str]) -> None:
     webbrowser.open(url)
 
 
-@hpc_group.command(name="ticket")
-def ticket_cmd() -> None:
-    """Opens the support request form."""
-    url = "https://www.rc.virginia.edu/form/support-request/"
-    console.msg(f"Opening support ticket form: {url}")
-    webbrowser.open(url)
 
 
 @hpc_group.command(name="jupyter")
