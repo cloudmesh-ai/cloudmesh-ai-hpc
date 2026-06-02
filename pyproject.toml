@@ -7,6 +7,7 @@ name = "cloudmesh-ai-hpc"
 
 dynamic = ["version"]
 description = "Extension hpc created by CME"
+requires-python = ">=3.12"
 license = "Apache-2.0"
 urls = { "Homepage" = "https://github.com/cloudmesh-ai/cloudmesh-ai-hpc" }
 classifiers = [
@@ -24,6 +25,8 @@ dependencies = [
     "click",
     "pyyaml",
     "cloudmesh-ai-theme",
+    "pydantic>=2.0.0",
+    "tabulate",
 ]
 
 [project.optional-dependencies]
@@ -38,7 +41,8 @@ dev = [
 version = {file = "VERSION"}
 
 [project.entry-points."cloudmesh.ai.command"]
-hpc = "command.hpc:register"
+hpc = "cloudmesh.ai.command.hpc:register"
+sq = "cloudmesh.ai.command.sq:register"
 
 [tool.setuptools.packages.find]
 where = ["src"]
