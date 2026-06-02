@@ -588,8 +588,8 @@ def slurm_cancel(job_id: str, debug: bool) -> None:
 def hpc_ticket(target: Optional[str]) -> None:
     """Open a support request. Use 'www' for the web form, or leave blank for email."""
     hpc = Hpc()
-    # Use email from documentation authors
-    support_email = "laszewski@gmail.com"
+    # Official UVA HPC RC Support email
+    support_email = "hpc-support@virginia.edu"
     support_url = "https://www.rc.virginia.edu/form/support-request/"
 
     if target == "www":
